@@ -1,12 +1,12 @@
 <template>
     <div class="main">
-        <div class="container flex items-center justify-center mx-auto border-2 border-indigo-600 ">
+        <div class="container flex items-center justify-center mx-auto  ">
             <h1 class="text-2xl font-bold mb-4">To Do App</h1>
         </div>
-        <div class="container mx-auto border-2 border-red-600">
+        <div class="container mx-auto flex gap-2 ">
 
-            <input type="text" v-model="newTask"  @keyup.enter="addTask" class="border rounded p-2 w-full">
-            <button @click="addTask" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+            <input type="text" v-model="newTask"  @keyup.enter="addTask()" class="border rounded p-2 w-full">
+            <button @click="addTask()" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
 
         </div>
 
@@ -15,21 +15,20 @@
 
 
 <script setup>
+import {ref} from 'vue';
+
+
 
 const newTask = ref('');
-const allTask = ref([]);
-
+const tasks = ref([]);
 
 const addTask = () => {
-    console.log(newTask.value);
-
-    if (newTask.value) {
-        allTask.value.push({
-            name: newTask.value,
-            isComplete: false,
-        })
-    }
-
-
-}
+  console.log('newtask', newTask.value)
+    
+  if (newTask.value.trim()) {
+    tasks.value.push({ text: newTask.value, isCompleted: false });
+    newTask.value = '';
+  }
+  console.log(tasks.value)
+};
 </script>
